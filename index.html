@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindX Cinema - Anime</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">MINDX-CINEMA</div>
+            <div class="user-info">
+                <span id="username-display">Chào, Otaku!</span>
+                <button onclick="logout()">Đăng xuất</button>
+            </div>
+        </nav>
+    </header>
+
+    <main id="app-container">
+        <section id="movie-list-section">
+            <h1 class="section-title">Anime Hot - Nhiều Thể Loại</h1>
+
+            <!-- Ô tìm kiếm -->
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="search-input" 
+                    placeholder="Nhập tên anime..."
+                    onkeydown="handleSearchKey(event)"
+                >
+                <button class="btn-search" onclick="searchAnime()">
+                    <i class="fas fa-search"></i> Tìm
+                </button>
+            </div>
+
+            <!-- Nút lọc thể loại -->
+            <div class="genre-buttons">
+                <button onclick="showDefault()">Tất cả</button>
+                <button onclick="loadAnimeFromJikan('romcom')">Rom-Com</button>
+                <button onclick="loadAnimeFromJikan('action')">Action</button>
+                <button onclick="loadAnimeFromJikan('top')">Top Anime</button>
+            </div>
+
+            <div id="movie-grid" class="movie-grid">
+                <!-- Danh sách anime sẽ hiện ở đây -->
+            </div>
+        </section>
+
+        <section id="movie-detail-section" class="hidden">
+            <button class="back-btn" onclick="closeDetail()">
+                <i class="fas fa-arrow-left"></i> Quay lại
+            </button>
+            <div id="detail-content"></div>
+        </section>
+    </main>
+   <script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="HEq0i4Yd49ULTBjJWqMPx";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
+    <script src="main.js"></script>
+<script>// --- SERVER CODE ---
+const jwt = require('jsonwebtoken');
+
+const secret = 6qgde6zhsrp45uboeyy3vy5uwavpo9ep; // Your chatbase secret key (should be stored as a secret not in the code)
+
+const user = await getSignedInUser(); // Get the current user signed in to your site
+
+const token = jwt.sign(
+    {
+        user_id: user.id, // Your user's id
+        email: user.email, // User's email
+        stripe_accounts: user.stripe_accounts, // User's stripe accounts for stripe integration
+        // ... other custom attributes
+    },
+    secret,
+    { expiresIn: '1h' }
+);
+
+// --- CLIENT CODE ---
+const token = await getUserToken(); // Get the token from your server
+window.chatbase('identify', { token }); // identify the user with Chatbase
+</script>
+</body>
+</html>
