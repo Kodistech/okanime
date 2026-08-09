@@ -17,7 +17,7 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
         // Lưu trạng thái đăng nhập
         localStorage.setItem('currentUser', user);
         alert("Đăng nhập thành công!");
-        window.location.href = 'main.html';
+        window.location.href = 'index.html';
     } else {
         alert("Sai tên đăng nhập hoặc mật khẩu!");
     }
