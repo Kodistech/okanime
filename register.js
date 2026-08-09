@@ -1,5 +1,5 @@
 if (localStorage.getItem('currentUser')) {
-    window.location.href = 'main.html';
+    window.location.href = 'login.html';
 }
 
 document.getElementById('register-form').addEventListener('submit', function(e) {
